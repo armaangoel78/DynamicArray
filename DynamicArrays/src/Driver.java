@@ -4,7 +4,7 @@ public class Driver {
 	private static Random r = new Random(); 
 	
 	public static void main(String[] args) {
-		long lowest = 1000;
+		long lowest = 1000000000;
 		while (true) {
 			long start = System.currentTimeMillis();
 			DynamicArray arr = new DynamicArray();
@@ -23,6 +23,7 @@ public class Driver {
 	
 			//arr.og_remove();
 			arr.remove();
+			
 			
 			//System.out.println(arr.compare());
 			long time = System.currentTimeMillis() - start;

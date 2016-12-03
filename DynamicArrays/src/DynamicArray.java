@@ -8,7 +8,6 @@ public class DynamicArray {
 	private int max_removal_index = -1;
 	private int[] removals = new int[2];
 	
-	
 	public int[] getArray() {
 		return array;
 	}
@@ -28,7 +27,6 @@ public class DynamicArray {
 	}
 	
 	public void addToRemoveQueue(int index) {
-		
 		max_removal_index++;
 		if (max_removal_index + 1 < removals.length) {
 			removals[max_removal_index] = index;
@@ -41,7 +39,6 @@ public class DynamicArray {
 			}
 			removals = temp;
 		}
-		
 	}
 	
 	public void remove() {
@@ -51,7 +48,7 @@ public class DynamicArray {
 			while ((index > 0 ? removals[index] < removals[index-1] : false)) {
 				int temp = removals[index];
 				
-				if (removals[index] != -1) removals[index] = removals[index-1] - 1;
+				if (removals[index] != -1) removals[index] = removals[index-1] - 1; //compensation for sorting
 				else removals[index] = removals[index-1];
 				
 				removals[index-1] = temp;
@@ -62,17 +59,17 @@ public class DynamicArray {
 		int movement = 0;
 		int removeIndex = 0;
 		boolean evaluate = true;
-		for (int i = 0; i < array.length-1; i++) {
+		while (removals[removeIndex] == -1) {
+			removeIndex++;
+		}
+		
+		for (int i = removals[removeIndex]; i < array.length-1; i++) {
 			int index = i + 1;
 			if (evaluate) {
-				while (removals[removeIndex] == -1) {
-					removeIndex++;
-				}
-				
 				if (i - movement == removals[removeIndex]){
 					movement++;
 					removeIndex++;
-
+					
 					if (removeIndex >= removals.length) {
 						evaluate = false;
 					}
