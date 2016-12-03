@@ -28,6 +28,7 @@ public class DynamicArray {
 	}
 	
 	public void addToRemoveQueue(int index) {
+		
 		max_removal_index++;
 		if (max_removal_index + 1 < removals.length) {
 			removals[max_removal_index] = index;
@@ -40,6 +41,7 @@ public class DynamicArray {
 			}
 			removals = temp;
 		}
+		
 	}
 	
 	public void remove() {
@@ -48,13 +50,15 @@ public class DynamicArray {
 			int index = i;
 			while ((index > 0 ? removals[index] < removals[index-1] : false)) {
 				int temp = removals[index];
-				removals[index] = removals[index-1];
+				
+				if (removals[index] != -1) removals[index] = removals[index-1] - 1;
+				else removals[index] = removals[index-1];
+				
 				removals[index-1] = temp;
 				index--;
 			}
 		}
 		
-		//remove numbers
 		int movement = 0;
 		int removeIndex = 0;
 		boolean evaluate = true;
@@ -84,13 +88,15 @@ public class DynamicArray {
 	}
 	
 	public void og_remove() {
-		og_array = array;
+		og_array = new int[array.length];
+		
+		for (int i = 0; i < array.length; i++) {
+			og_array[i] = array[i];
+		}
+	
 		for (int i = 0; i < removals.length; i++) {
-			boolean remove = false;
-			System.out.println(i);
-			for (int x = 0; x < og_array.length-1; x++) {
-				if (removals[i] == x || remove){
-					remove = true;
+			if (removals[i] != -1) {
+				for (int x = removals[i]; x < og_array.length-1; x++) {
 					og_array[x] = og_array[x+1];
 				}
 			}
@@ -98,9 +104,12 @@ public class DynamicArray {
 	}
 	
 	public boolean compare() {
+		boolean same = true;
 		for (int i = 0; i < array.length; i++) {
-			if (array[i] != og_array[i]) return false;
+			if (array[i] != og_array[i]) {
+				same = false;
+			}
 		}
-		return true;
+		return same;
 	}
 }
