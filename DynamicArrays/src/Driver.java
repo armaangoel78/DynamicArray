@@ -10,19 +10,19 @@ public class Driver {
 			DynamicArray arr = new DynamicArray();
 			
 			int size = 10000000;
-			int removals = 1000;
+			int numRemovals = 1000;
 			
 			for (int i = 0; i < size; i++) {
 				arr.add(i);
 			}
 			
-			for (int i = 0; i < removals; i++) {
-				int removal = r.nextInt(size);
-				arr.addToRemoveQueue(removal);
+			int removals[] = new int[numRemovals];
+			for (int i = 0; i < numRemovals; i++) {
+				removals[i] = r.nextInt(size);
 			}
 	
 			//arr.og_remove();
-			arr.remove();
+			arr.remove(removals);
 			
 			
 			//System.out.println(arr.compare());

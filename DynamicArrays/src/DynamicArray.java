@@ -26,6 +26,15 @@ public class DynamicArray {
 		}
 	}
 	
+	public void removeQueue(int[] removals) {
+		this.removals = removals;
+	}
+	
+	public void remove(int[] removals) {
+		this.removals = removals;
+		remove();
+	}
+	
 	public void addToRemoveQueue(int index) {
 		max_removal_index++;
 		if (max_removal_index + 1 < removals.length) {
