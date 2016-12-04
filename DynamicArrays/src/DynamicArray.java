@@ -15,7 +15,7 @@ public class DynamicArray {
 	public void add(int value) {
 		max_index++;
 		if (max_index + 1 > array.length) {
-			int[] temp = new int[array.length * 2];
+			int[] temp = new int[array.length * 10];
 			for (int i = 0; i < array.length; i++) {
 				temp[i] = array[i];
 			}
@@ -31,7 +31,7 @@ public class DynamicArray {
 		if (max_removal_index + 1 < removals.length) {
 			removals[max_removal_index] = index;
 		} else {
-			int[] temp = new int[removals.length * 2];
+			int[] temp = new int[removals.length * 10];
 			for (int i = 0; i < temp.length; i++) {
 				if (i + 1 < removals.length) temp[i] = removals[i];
 				else if (i + 1 == removals.length) temp[i] = index;
@@ -63,7 +63,7 @@ public class DynamicArray {
 			removeIndex++;
 		}
 		
-		for (int i = removals[removeIndex]; i < array.length-1; i++) {
+		for (int i = removals[removeIndex]; i < max_index + movement; i++) {
 			int index = i + 1;
 			if (evaluate) {
 				if (i - movement == removals[removeIndex]){
