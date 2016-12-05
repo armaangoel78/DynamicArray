@@ -1,5 +1,5 @@
-
 public class DynamicArray {
+
 
 	private int[] og_array;
 	private int[] array = new int[2];
@@ -23,6 +23,23 @@ public class DynamicArray {
 			array[max_index] = value;
 		} else {
 			array[max_index] = value;
+		}
+	}
+	
+	public void add (int[] array) {
+		if (max_index == -1) {
+			this.array = array;
+		}
+		
+		else {
+			int temp[] = new int[max_index + 1 + array.length];
+			for (int i = 0; i < temp.length; i++) {
+				int value = (i <= max_index ? this.array[i] : array[i-max_index-1]);
+				temp[i] = value;
+			}
+			
+			this.array = temp;
+			max_index = array.length-1;
 		}
 	}
 	
@@ -71,9 +88,8 @@ public class DynamicArray {
 		while (removals[removeIndex] == -1) {
 			removeIndex++;
 		}
-		
 		for (int i = removals[removeIndex]; i < max_index + movement; i++) {
-			int index = i + 1;
+			int index1 = i + 1;
 			if (evaluate) {
 				if (i - movement == removals[removeIndex]){
 					movement++;
@@ -84,8 +100,9 @@ public class DynamicArray {
 					}
 				}
 			}
-			
-			array[index-movement] = array[index];
+			int index2 = index1;
+			if (index2 + 1 > array.length) index2 = array.length-1;
+			array[index1-movement] = array[index2];
 		}
 	}
 	
@@ -96,6 +113,7 @@ public class DynamicArray {
 	public void og_remove() {
 		og_array = new int[array.length];
 		
+		//set each value of og_array to array w/out making og_array point to array
 		for (int i = 0; i < array.length; i++) {
 			og_array[i] = array[i];
 		}
