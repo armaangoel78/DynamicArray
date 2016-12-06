@@ -15,18 +15,15 @@ public class Driver {
 				randoms[i] = r.nextInt(size);
 			}
 			
-			
-			long start = System.currentTimeMillis();
-		
-			DynamicArray arr = new DynamicArray();
-			
 			int[] array = new int[size];
 			for (int i = 0; i < size; i++) {
 				array[i] = i;
 			}
 			
-			arr.add(array);
-			
+			long start = System.currentTimeMillis();
+		
+			DynamicArray arr = new DynamicArray();
+			arr.setArray(array);
 			arr.remove(randoms);
 			
 			long time = System.currentTimeMillis() - start;

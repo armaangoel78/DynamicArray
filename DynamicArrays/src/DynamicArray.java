@@ -26,24 +26,22 @@ public class DynamicArray {
 		}
 	}
 	
-	public void add (int[] array) {
-		if (max_index == -1) {
-			this.array = array;
-		}
-		
-		else {
-			int temp[] = new int[max_index + 1 + array.length];
-			for (int i = 0; i < temp.length; i++) {
-				int value = (i <= max_index ? this.array[i] : array[i-max_index-1]);
-				temp[i] = value;
-			}
-			
-			this.array = temp;
-			max_index = array.length-1;
-		}
+	public void setArray (int[] array) {
+		this.array = array;
 	}
 	
-	public void removeQueue(int[] removals) {
+	public void add (int[] array) {
+		int temp[] = new int[max_index + 1 + array.length];
+		for (int i = 0; i < temp.length; i++) {
+			int value = (i <= max_index ? this.array[i] : array[i-max_index-1]);
+			temp[i] = value;
+		}
+		
+		this.array = temp;
+		max_index = array.length-1;
+	}
+	
+	public void setRemoveQueue(int[] removals) {
 		this.removals = removals;
 	}
 	
